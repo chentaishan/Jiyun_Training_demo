@@ -1,0 +1,2 @@
+rootProject.name='Jiyun_Training_demo'
+include ':app'
