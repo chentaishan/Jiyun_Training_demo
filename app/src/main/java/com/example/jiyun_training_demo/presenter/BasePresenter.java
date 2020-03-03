@@ -1,11 +1,11 @@
 package com.example.jiyun_training_demo.presenter;
 
-public abstract class BasePresenter<V> implements IBasePresenter {
+public abstract class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
 
     protected V view;
 
 
-
+    @Override
     public void attachView(V baseView) {
         view = baseView;
     }
