@@ -22,9 +22,9 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
         final Retrofit retrofit = HttpManager.getInstance().getRetrofit(HomeService.baseUrl);
 
-        retrofit.create(HomeService.class).getHome()
+        ResourceSubscriber<ComonResult<HomeBean>> resourceSubscriber = retrofit.create(HomeService.class).getHome()
 
-                 .compose(RxUtils.<ComonResult<HomeBean>>rxScheduler())
+                .compose(RxUtils.<ComonResult<HomeBean>>rxScheduler())
                 .subscribeWith(new ResourceSubscriber<ComonResult<HomeBean>>() {
                     @Override
                     public void onNext(ComonResult<HomeBean> homeBean) {
@@ -42,5 +42,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
                     }
                 });
+
+        addSubscribe(resourceSubscriber);
     }
 }

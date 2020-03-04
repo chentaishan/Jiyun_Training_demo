@@ -24,7 +24,7 @@ public class TopicPresenter  extends BasePresenter<TopicContract.View> implement
 
         Flowable<ComonResult<TopicBean>> topicBean = homeService.getTopicBean();
 
-        topicBean .compose(RxUtils.<ComonResult<TopicBean>>rxScheduler())
+        ResourceSubscriber<ComonResult<TopicBean>> resourceSubscriber = topicBean.compose(RxUtils.<ComonResult<TopicBean>>rxScheduler())
                 .subscribeWith(new ResourceSubscriber<ComonResult<TopicBean>>() {
                     @Override
                     public void onNext(ComonResult<TopicBean> homeBean) {
@@ -43,6 +43,7 @@ public class TopicPresenter  extends BasePresenter<TopicContract.View> implement
                     }
                 });
 
+        addSubscribe(resourceSubscriber);
 
     }
 
