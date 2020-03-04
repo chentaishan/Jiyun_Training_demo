@@ -6,16 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jiyun_training_demo.presenter.IBasePresenter;
-import com.example.jiyun_training_demo.presenter.IBaseView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 //import butterknife.ButterKnife;
 //import butterknife.Unbinder;
 
-public abstract class BaseFragment<P extends IBasePresenter,T> extends Fragment implements IBaseView {
+public abstract class BaseFragment<P extends IBasePresenter> extends Fragment implements IBaseView {
 
 
     protected P presenter;

@@ -2,17 +2,20 @@ package com.example.jiyun_training_demo.presenter;
 
 import android.util.Log;
 
+import com.example.jiyun_training_demo.base.BasePresenter;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
+import com.example.jiyun_training_demo.contract.HomeContract;
 import com.example.jiyun_training_demo.service.HomeService;
 import com.example.jiyun_training_demo.service.HttpManager;
+import com.example.jiyun_training_demo.ui.home.HomeFragment;
 import com.example.jiyun_training_demo.utils.RxUtils;
 
 
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.Retrofit;
 
-public class HomePresenter extends BasePresenter {
+public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter{
 
 
     public void getHomeData(){

@@ -1,4 +1,4 @@
-package com.example.jiyun_training_demo.presenter;
+package com.example.jiyun_training_demo.base;
 
 public interface IBasePresenter<V extends IBaseView> {
 

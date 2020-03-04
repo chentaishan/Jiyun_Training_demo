@@ -4,22 +4,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.base.BaseFragment;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
+import com.example.jiyun_training_demo.contract.HomeContract;
 import com.example.jiyun_training_demo.presenter.HomePresenter;
 
-public class HomeFragment  extends BaseFragment<HomePresenter, HomeBean> {
+public class HomeFragment  extends BaseFragment<HomePresenter>  implements HomeContract.View {
 
 
     @Override
@@ -54,11 +48,13 @@ public class HomeFragment  extends BaseFragment<HomePresenter, HomeBean> {
         Log.d(TAG, "updateUISuccess: "+results.getData().toString());
     }
 
+    @Override
+    public void updateUIFailed(String msg) {
+
+    }
+
     private static final String TAG = "HomeFragment";
 
 
-    @Override
-    public void updateUIFailed() {
 
-    }
 }

@@ -1,10 +1,6 @@
 package com.example.jiyun_training_demo.base;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import com.example.jiyun_training_demo.presenter.BasePresenter;
-import com.example.jiyun_training_demo.presenter.IBaseView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

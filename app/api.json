@@ -1,4 +1,4 @@
-const ApiRootUrl = 'https://cdwan.cn/api';
+const ApiRootUrl = 'https://cdwan.cn/api/topic/list';
 
 module.exports = {
 IndexUrl: ApiRootUrl + 'index/index', //首页数据接口
