@@ -9,6 +9,7 @@ import com.example.jiyun_training_demo.contract.TopicContract;
 import com.example.jiyun_training_demo.service.HomeService;
 import com.example.jiyun_training_demo.service.HttpManager;
 import com.example.jiyun_training_demo.ui.dashboard.TopicFragment;
+import com.example.jiyun_training_demo.utils.CallBackSubscriber;
 import com.example.jiyun_training_demo.utils.RxUtils;
 
 import io.reactivex.Flowable;
@@ -25,21 +26,13 @@ public class TopicPresenter  extends BasePresenter<TopicContract.View> implement
         Flowable<ComonResult<TopicBean>> topicBean = homeService.getTopicBean();
 
         ResourceSubscriber<ComonResult<TopicBean>> resourceSubscriber = topicBean.compose(RxUtils.<ComonResult<TopicBean>>rxScheduler())
-                .subscribeWith(new ResourceSubscriber<ComonResult<TopicBean>>() {
-                    @Override
-                    public void onNext(ComonResult<TopicBean> homeBean) {
-//                        Log.i("onNext:",homeBean.toString());
-                        view.updateUISuccess(homeBean);
-                    }
+                .subscribeWith(new CallBackSubscriber<ComonResult<TopicBean>>(view){
 
                     @Override
-                    public void onError(Throwable t) {
+                    public void onNext(ComonResult<TopicBean> o) {
+                        super.onNext(o);
 
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                        view.updateUISuccess(o);
                     }
                 });
 
