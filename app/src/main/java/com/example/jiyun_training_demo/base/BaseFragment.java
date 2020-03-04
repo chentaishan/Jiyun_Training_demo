@@ -19,9 +19,10 @@ public abstract class BaseFragment<P extends IBasePresenter> extends Fragment im
     protected Context context;
 //    Unbinder bind;
 
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         context = getActivity();
     }
 
