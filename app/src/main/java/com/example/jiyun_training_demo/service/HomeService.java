@@ -15,7 +15,7 @@ import retrofit2.http.POST;
 
 public interface HomeService {
 
-    String baseUrl="https://cdwan.cn/api/";
+    public static String baseUrl="https://cdwan.cn/api/";
 
     @GET("index")
     Flowable<ComonResult<HomeBean>> getHome();
