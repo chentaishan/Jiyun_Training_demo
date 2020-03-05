@@ -3,6 +3,7 @@ package com.example.jiyun_training_demo.service;
 import android.util.Log;
 
 import com.example.jiyun_training_demo.base.MyApp;
+import com.example.jiyun_training_demo.utils.SpUtils;
 import com.example.jiyun_training_demo.utils.SystemUtils;
 
 import java.io.IOException;
@@ -52,10 +53,29 @@ public class HttpManager {
         final OkHttpClient build = new OkHttpClient.Builder()
                 .cache(new Cache(MyApp.myApp.getCacheDir(), 10 * 1024 * 1024))
                 .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(new HeaderIntercepter())
                 .addNetworkInterceptor(new NetWorkInterceptor())
                 .build();
 
         return build;
+    }
+
+    /**
+     * 头部 拦截器
+     */
+    class HeaderIntercepter implements Interceptor{
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            Request request = chain.request();
+
+            request.newBuilder()    .addHeader("Client-Type","ANDROID")
+                    .addHeader("X-Nideshop-Token", SpUtils.getInstance().getString("token"))
+                    .build();
+
+            return null;
+        }
     }
 
     class NetWorkInterceptor implements Interceptor{
