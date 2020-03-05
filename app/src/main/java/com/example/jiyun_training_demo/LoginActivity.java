@@ -20,7 +20,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
 
     EditText name,psw;
-    Button login;
+    Button login,register;
     @Override
     protected LoginPresenter initPresenter() {
         return new LoginPresenter();
@@ -32,10 +32,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         name = findViewById(R.id.name);
         psw = findViewById(R.id.pass);
         login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.loginIn(name.getText().toString(),psw.getText().toString());
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });
     }
