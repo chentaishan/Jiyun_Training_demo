@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 //import butterknife.ButterKnife;
 //import butterknife.Unbinder;
 
-public abstract class BaseFragment<P extends IBasePresenter> extends Fragment implements IBaseView {
+public abstract class BaseFragment<P extends IBasePresenter> extends Fragment  {
 
 
     protected P presenter;
