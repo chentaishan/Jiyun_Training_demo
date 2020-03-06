@@ -50,7 +50,7 @@ public class TopicFragment  extends BaseFragment<TopicPresenter> implements Topi
 
     @Override
     public void updateUISuccess(ComonResult<TopicBean> result) {
-        topicAdapter.addData(result.getData().getData());
+        topicAdapter.addDataList(result.getData().getData());
     }
 
 

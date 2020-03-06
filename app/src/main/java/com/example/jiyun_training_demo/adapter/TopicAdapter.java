@@ -17,48 +17,67 @@ import com.example.jiyun_training_demo.bean.TopicBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
+public class TopicAdapter extends BaseAdapter<TopicBean.DataBean> {
+//public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
 
-    Context context;
-    List<TopicBean.DataBean>   dataBeans = new ArrayList<>();
+
     public TopicAdapter(Context context) {
-
-        this.context = context;
-    }
-
-    public void addData(  List<TopicBean.DataBean>   dataBeans){
-
-        this.dataBeans.addAll(dataBeans);
-        notifyDataSetChanged();
-    }
-
-    @NonNull
-    @Override
-    public TopicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(context).inflate(R.layout.topic_list_item,parent,false);
-        return new ViewHolder(root);
+        super(context);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, int position) {
-
-        TopicBean.DataBean dataBean = dataBeans.get(position);
-        Glide.with(context).load(dataBean.getScene_pic_url()).into(holder.img);
-        holder.title.setText(dataBean.getTitle());
+    protected int getLayout() {
+        return R.layout.topic_list_item;
     }
 
     @Override
-    public int getItemCount() {
-        return dataBeans.size();
-    }
+    protected void bindData(BaseViewHolder baseViewHolder, TopicBean.DataBean dataBean) {
+//        img = itemView.findViewById(R.id.image);
+        ImageView img = (ImageView) baseViewHolder.getViewById(R.id.image);
+        TextView title = (TextView) baseViewHolder.getViewById(R.id.title);
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img;
-        TextView title;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            img = itemView.findViewById(R.id.image);
-            title = itemView.findViewById(R.id.title);
-        }
+        Glide.with(context).load(dataBean.getScene_pic_url()).into(img);
+        title.setText(dataBean.getTitle());
+
     }
+//    public TopicAdapter(Context context) {
+//
+//        this.context = context;
+//    }
+//
+//    public void addData(  List<TopicBean.DataBean>   dataBeans){
+//
+//        this.dataBeans.addAll(dataBeans);
+//        notifyDataSetChanged();
+//    }
+//
+//    @NonNull
+//    @Override
+//    public TopicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        View root = LayoutInflater.from(context).inflate(R.layout.topic_list_item,parent,false);
+//        return new ViewHolder(root);
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, int position) {
+//
+//        TopicBean.DataBean dataBean = dataBeans.get(position);
+//        Glide.with(context).load(dataBean.getScene_pic_url()).into(holder.img);
+//        holder.title.setText(dataBean.getTitle());
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return dataBeans.size();
+//    }
+//
+//    public class ViewHolder extends RecyclerView.ViewHolder {
+//        ImageView img;
+//        TextView title;
+//        public ViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            img = itemView.findViewById(R.id.image);
+//            title = itemView.findViewById(R.id.title);
+//        }
+//    }
 }
