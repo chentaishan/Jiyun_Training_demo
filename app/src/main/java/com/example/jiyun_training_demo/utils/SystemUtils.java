@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import com.example.jiyun_training_demo.base.MyApp;
 
@@ -86,5 +87,12 @@ public class SystemUtils {
         }
     }
 
+    public static int getScreenWidth(Context context){
+
+        WindowManager wm = (WindowManager) context .getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        int height = wm.getDefaultDisplay().getHeight();
+        return width;
+    }
 
 }

@@ -1,20 +1,33 @@
 package com.example.jiyun_training_demo.ui.home;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
-
+import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.base.BaseFragment;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.contract.HomeContract;
 import com.example.jiyun_training_demo.presenter.HomePresenter;
+import com.example.jiyun_training_demo.view.HomeSubOne;
+import com.example.jiyun_training_demo.view.HomeSubTwo;
+import com.example.jiyun_training_demo.view.Home_HotGoods;
+import com.example.jiyun_training_demo.view.Home_NewGoods;
+import com.example.jiyun_training_demo.view.Home_TopicGoods;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 
-public class HomeFragment  extends BaseFragment<HomePresenter>  implements HomeContract.View {
+public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View<HomeBean> {
 
+    Banner banner;
+    HomeSubOne homeSubOne;
+    HomeSubTwo homeSubTwo;
+    Home_NewGoods mNewGoodsHome;
+    private Home_HotGoods mHotGoodsHome;
+    private Home_TopicGoods mHotTopicHome;
 
     @Override
     protected void initData() {
@@ -30,6 +43,13 @@ public class HomeFragment  extends BaseFragment<HomePresenter>  implements HomeC
     @Override
     protected void initView(View view) {
 
+        banner = view.findViewById(R.id.banner);
+        homeSubOne = view.findViewById(R.id.home_one_layout);
+        homeSubTwo = view.findViewById(R.id.home_two_layout);
+
+        mNewGoodsHome = view.findViewById(R.id.home_new_goods);
+        mHotGoodsHome =   view.findViewById(R.id.home_hot_goods);
+        mHotTopicHome =   view.findViewById(R.id.home_topic_goods);
     }
 
     @Override
@@ -43,9 +63,29 @@ public class HomeFragment  extends BaseFragment<HomePresenter>  implements HomeC
     }
 
     @Override
-    public void updateUISuccess(ComonResult results) {
+    public void updateUISuccess(ComonResult<HomeBean> results) {
 
-        Log.d(TAG, "updateUISuccess: "+results.getData().toString());
+        banner.setImages(results.getData().getBanner()).setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+
+                HomeBean.BannerBean bannerBean = (HomeBean.BannerBean) path;
+                Glide.with(getActivity()).load(bannerBean.getImage_url()).into(imageView);
+            }
+        }).start();
+
+        homeSubOne.addItem(results.getData().getChannel());
+
+
+        homeSubTwo.initGird(results.getData().getBrandList());
+
+
+        mNewGoodsHome.initGird(results.getData().getNewGoodsList());
+
+        mHotGoodsHome.initList(results.getData().getHotGoodsList());
+
+        mHotTopicHome.initList(results.getData().getTopicList());
+        Log.d(TAG, "updateUISuccess: " + results.getData().toString());
     }
 
     @Override
@@ -54,7 +94,6 @@ public class HomeFragment  extends BaseFragment<HomePresenter>  implements HomeC
     }
 
     private static final String TAG = "HomeFragment";
-
 
 
 }
