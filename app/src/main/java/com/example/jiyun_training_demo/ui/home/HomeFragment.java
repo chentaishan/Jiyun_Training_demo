@@ -4,21 +4,26 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.base.BaseFragment;
+import com.example.jiyun_training_demo.bean.CategoryListBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.contract.HomeContract;
 import com.example.jiyun_training_demo.presenter.HomePresenter;
 import com.example.jiyun_training_demo.view.HomeSubOne;
 import com.example.jiyun_training_demo.view.HomeSubTwo;
+import com.example.jiyun_training_demo.view.Home_CategoryView;
 import com.example.jiyun_training_demo.view.Home_HotGoods;
 import com.example.jiyun_training_demo.view.Home_NewGoods;
 import com.example.jiyun_training_demo.view.Home_TopicGoods;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
+
+import java.util.List;
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View<HomeBean> {
 
@@ -28,6 +33,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     Home_NewGoods mNewGoodsHome;
     private Home_HotGoods mHotGoodsHome;
     private Home_TopicGoods mHotTopicHome;
+    private LinearLayout mCategorylist;
 
     @Override
     protected void initData() {
@@ -48,8 +54,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         homeSubTwo = view.findViewById(R.id.home_two_layout);
 
         mNewGoodsHome = view.findViewById(R.id.home_new_goods);
-        mHotGoodsHome =   view.findViewById(R.id.home_hot_goods);
-        mHotTopicHome =   view.findViewById(R.id.home_topic_goods);
+        mHotGoodsHome = view.findViewById(R.id.home_hot_goods);
+        mHotTopicHome = view.findViewById(R.id.home_topic_goods);
+        mCategorylist = (LinearLayout)view.findViewById(R.id.categorylist);
     }
 
     @Override
@@ -76,15 +83,28 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         homeSubOne.addItem(results.getData().getChannel());
 
-
         homeSubTwo.initGird(results.getData().getBrandList());
-
 
         mNewGoodsHome.initGird(results.getData().getNewGoodsList());
 
         mHotGoodsHome.initList(results.getData().getHotGoodsList());
 
         mHotTopicHome.initList(results.getData().getTopicList());
+
+
+        List<CategoryListBean> categoryList = results.getData().getCategoryList();
+
+        for (int i = 0; i < categoryList.size(); i++) {
+
+
+            Home_CategoryView home_categoryView = new Home_CategoryView(getContext());
+
+            home_categoryView.initView(categoryList.get(i));
+
+            mCategorylist.addView(home_categoryView);
+
+        }
+
         Log.d(TAG, "updateUISuccess: " + results.getData().toString());
     }
 
