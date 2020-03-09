@@ -105,7 +105,7 @@ public class Home_CategoryView extends LinearLayout {
                 //添加间隔线
                 View view = new View(getContext());
                 view.setLayoutParams(new LayoutParams(30, ViewGroup.LayoutParams.MATCH_PARENT));
-                view.setBackgroundColor(Color.parseColor("#ffffff"));
+//                view.setBackgroundColor(Color.parseColor("#ffffff"));
                 rowLinearlayout. addView(view);
 
                 rowLinearlayout.addView(item);

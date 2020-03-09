@@ -29,19 +29,19 @@ import java.util.List;
 /**
  * 品牌制造商
  */
-public class HomeSubTwo extends LinearLayout {
-    public HomeSubTwo(Context context) {
+public class Home_Brand extends LinearLayout {
+    public Home_Brand(Context context) {
         super(context);
 
         initView();
     }
 
-    public HomeSubTwo(Context context, @Nullable AttributeSet attrs) {
+    public Home_Brand(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public HomeSubTwo(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public Home_Brand(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }

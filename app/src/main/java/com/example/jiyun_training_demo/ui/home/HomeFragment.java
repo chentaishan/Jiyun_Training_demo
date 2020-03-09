@@ -14,8 +14,8 @@ import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.contract.HomeContract;
 import com.example.jiyun_training_demo.presenter.HomePresenter;
-import com.example.jiyun_training_demo.view.HomeSubOne;
-import com.example.jiyun_training_demo.view.HomeSubTwo;
+import com.example.jiyun_training_demo.view.Home_Type;
+import com.example.jiyun_training_demo.view.Home_Brand;
 import com.example.jiyun_training_demo.view.Home_CategoryView;
 import com.example.jiyun_training_demo.view.Home_HotGoods;
 import com.example.jiyun_training_demo.view.Home_NewGoods;
@@ -28,8 +28,8 @@ import java.util.List;
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View<HomeBean> {
 
     Banner banner;
-    HomeSubOne homeSubOne;
-    HomeSubTwo homeSubTwo;
+    Home_Type homeType;
+    Home_Brand homeBrand;
     Home_NewGoods mNewGoodsHome;
     private Home_HotGoods mHotGoodsHome;
     private Home_TopicGoods mHotTopicHome;
@@ -50,8 +50,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     protected void initView(View view) {
 
         banner = view.findViewById(R.id.banner);
-        homeSubOne = view.findViewById(R.id.home_one_layout);
-        homeSubTwo = view.findViewById(R.id.home_two_layout);
+        homeType = view.findViewById(R.id.home_one_layout);
+        homeBrand = view.findViewById(R.id.home_two_layout);
 
         mNewGoodsHome = view.findViewById(R.id.home_new_goods);
         mHotGoodsHome = view.findViewById(R.id.home_hot_goods);
@@ -81,9 +81,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             }
         }).start();
 
-        homeSubOne.addItem(results.getData().getChannel());
+        homeType.addItem(results.getData().getChannel());
 
-        homeSubTwo.initGird(results.getData().getBrandList());
+        homeBrand.initGird(results.getData().getBrandList());
 
         mNewGoodsHome.initGird(results.getData().getNewGoodsList());
 
@@ -95,7 +95,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         List<CategoryListBean> categoryList = results.getData().getCategoryList();
 
         for (int i = 0; i < categoryList.size(); i++) {
-
 
             Home_CategoryView home_categoryView = new Home_CategoryView(getContext());
 

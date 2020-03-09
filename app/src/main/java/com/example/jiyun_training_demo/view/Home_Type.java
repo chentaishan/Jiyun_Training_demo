@@ -14,16 +14,16 @@ import com.example.jiyun_training_demo.bean.Home_ChannelBean;
 
 import java.util.List;
 
-public class HomeSubOne extends LinearLayout {
-    public HomeSubOne(Context context) {
+public class Home_Type extends LinearLayout {
+    public Home_Type(Context context) {
         super(context);
     }
 
-    public HomeSubOne(Context context, @Nullable AttributeSet attrs) {
+    public Home_Type(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public HomeSubOne(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public Home_Type(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
