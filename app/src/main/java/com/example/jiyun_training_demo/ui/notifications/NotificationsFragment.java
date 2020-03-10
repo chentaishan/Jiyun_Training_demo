@@ -1,24 +1,19 @@
 package com.example.jiyun_training_demo.ui.notifications;
 
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
-import com.example.jiyun_training_demo.adapter.SortTypeItemAdapter;
 import com.example.jiyun_training_demo.base.BaseFragment;
-import com.example.jiyun_training_demo.base.IBasePresenter;
-import com.example.jiyun_training_demo.bean.ComonResult;
+import com.example.jiyun_training_demo.bean.CataLogItemBean;
+import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.SortTypeBean;
-import com.example.jiyun_training_demo.bean.SortType_Itembean;
 import com.example.jiyun_training_demo.contract.ISortTypeContract;
 import com.example.jiyun_training_demo.presenter.SortTypePresenter;
+import com.example.jiyun_training_demo.view.MySelftGridView;
 
 import java.util.List;
 
@@ -31,13 +26,17 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
 
 
     private VerticalTabLayout mTablayout;
-    private GridView mGridview;
-    private SortTypeItemAdapter sortTypeItemAdapter;
+
+    private ImageView mImageTop;
+    private TextView mTitle;
+    private TextView mTitleType;
+    private LinearLayout mContent;
 
     @Override
     protected void initData() {
 
         presenter.getSortTypeList();
+        presenter.getTypeList("1005000");
     }
 
     @Override
@@ -48,8 +47,25 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     @Override
     protected void initView(View itemView) {
 
+
         mTablayout = (VerticalTabLayout) itemView.findViewById(R.id.tablayout);
-        mGridview = (GridView) itemView.findViewById(R.id.gridview);
+        mImageTop = (ImageView) itemView.findViewById(R.id.top_image);
+        mTitle = (TextView) itemView.findViewById(R.id.title);
+        mTitleType = (TextView) itemView.findViewById(R.id.type_title);
+        mContent = (LinearLayout) itemView.findViewById(R.id.content);
+
+        mTablayout.addTab(new QTabView(getActivity()));
+        mTablayout.addOnTabSelectedListener(new VerticalTabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabView tab, int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabView tab, int position) {
+
+            }
+        });
     }
 
     @Override
@@ -58,26 +74,13 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     }
 
     private static final String TAG = "NotificationsFragment";
+
     @Override
-    public void updateUISuccess(ComonResult<SortTypeBean>  result) {
+    public void updateUISuccess(CatalogBean result) {
 
-        final List<SortTypeBean.CategoryListBean> categoryList = result.getData().getCategoryList();
+        final List<CatalogBean.DataBean.CategoryListBean> categoryList = result.getData().getCategoryList();
 
-        mTablayout.addTab(new QTabView(context));
-        mTablayout.addOnTabSelectedListener(new VerticalTabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabView tab, int position) {
 
-                Log.d(TAG, "onTabSelected: "+position);
-                presenter.getTypeList(categoryList.get(position).getId()+"");
-            }
-
-            @Override
-            public void onTabReselected(TabView tab, int position) {
-
-                Log.d(TAG, "onTabReselected: "+position);
-            }
-        });
         mTablayout.setTabAdapter(new TabAdapter() {
             @Override
             public int getCount() {
@@ -96,7 +99,6 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
 
             @Override
             public TabView.TabTitle getTitle(int position) {
-//                categoryList.get(position).getName()
                 return new TabView.TabTitle.Builder().setContent(categoryList.get(position).getName()).build();
             }
 
@@ -106,13 +108,25 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
             }
         });
 
-        sortTypeItemAdapter = new SortTypeItemAdapter(getActivity());
-        mGridview.setAdapter(sortTypeItemAdapter);
+
     }
 
     @Override
-    public void updateSubItem(SortType_Itembean sortType) {
-        sortTypeItemAdapter.setSubCategoryList(sortType.getData().getCurrentCategory().getSubCategoryList());
+    public void updateSubItem(CataLogItemBean cataLogItemBean) {
+
+
+
+        CataLogItemBean.DataBean.CurrentCategoryBean currentCategory = cataLogItemBean.getData().getCurrentCategory();
+
+        Glide.with(getActivity()).load(currentCategory.getWap_banner_url()).into(mImageTop);
+        mTitle.setText(currentCategory.getFront_name());
+        mTitleType.setText(cataLogItemBean.getData().getCurrentCategory().getName());
+
+        MySelftGridView mySelftGridView = new MySelftGridView(getActivity());
+        mySelftGridView.initMyGridView(cataLogItemBean.getData().getCurrentCategory().getSubCategoryList());
+
+        mContent.addView(mySelftGridView);
+
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.example.jiyun_training_demo.presenter;
 
 import com.example.jiyun_training_demo.base.BasePresenter;
 import com.example.jiyun_training_demo.base.IBasePresenter;
+import com.example.jiyun_training_demo.bean.CataLogItemBean;
+import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.SortTypeBean;
 import com.example.jiyun_training_demo.bean.SortType_Itembean;
@@ -14,18 +16,16 @@ import io.reactivex.Flowable;
 import io.reactivex.subscribers.ResourceSubscriber;
 
 public class SortTypePresenter  extends BasePresenter<ISortTypeContract.View> implements ISortTypeContract.Presenter {
-
-
     @Override
     public void getSortTypeList() {
-        Flowable<ComonResult<SortTypeBean>> sortTypeList = HttpManager.getInstance().getRetrofit(HomeService.baseUrl)
+        Flowable<CatalogBean> sortTypeList = HttpManager.getInstance().getRetrofit(HomeService.baseUrl)
                 .create(HomeService.class)
-                .getSortTypeList();
+                .getLeftDataList();
 
-        sortTypeList.compose(RxUtils.<ComonResult<SortTypeBean>>rxScheduler())
-                .subscribeWith(new ResourceSubscriber<ComonResult<SortTypeBean>>() {
+        sortTypeList.compose(RxUtils.<CatalogBean>rxScheduler())
+                .subscribeWith(new ResourceSubscriber<CatalogBean>() {
             @Override
-            public void onNext(ComonResult<SortTypeBean> sortTypeBean) {
+            public void onNext(CatalogBean sortTypeBean) {
 
                 view.updateUISuccess(sortTypeBean);
             }
@@ -45,13 +45,13 @@ public class SortTypePresenter  extends BasePresenter<ISortTypeContract.View> im
 
     @Override
     public void getTypeList(String id) {
-        Flowable<SortType_Itembean> sortTypeList = HttpManager.getInstance().getRetrofit(HomeService.baseUrl)
+        Flowable<CataLogItemBean> sortTypeList = HttpManager.getInstance().getRetrofit(HomeService.baseUrl)
                 .create(HomeService.class)
-                .getSortType_ItemList(id);
+                .getRightDataList(id);
 
-        sortTypeList.compose(RxUtils.<SortType_Itembean>rxScheduler()).subscribeWith(new ResourceSubscriber<SortType_Itembean>() {
+        sortTypeList.compose(RxUtils.<CataLogItemBean>rxScheduler()).subscribeWith(new ResourceSubscriber<CataLogItemBean>() {
             @Override
-            public void onNext(SortType_Itembean sortTypeBean) {
+            public void onNext(CataLogItemBean sortTypeBean) {
 
                 view.updateSubItem(sortTypeBean);
             }

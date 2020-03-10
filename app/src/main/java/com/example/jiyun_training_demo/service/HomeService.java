@@ -1,5 +1,7 @@
 package com.example.jiyun_training_demo.service;
 
+import com.example.jiyun_training_demo.bean.CataLogItemBean;
+import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.bean.LoginBean;
@@ -38,11 +40,13 @@ public interface HomeService {
     Flowable<ComonResult<RegisterBean>> registerInfo(@Field("nickname") String name, @Field("password") String password);
 //    String baseUrl="https://cdwan.cn/api/";
 
-//    https://cdwan.cn/api/catalog/index
+
+
     @GET("catalog/index")
-    Flowable<ComonResult<SortTypeBean>>  getSortTypeList();
+    Flowable<CatalogBean> getLeftDataList();
+
+    @GET("catalog/current?")
+    Flowable<CataLogItemBean> getRightDataList(@Query("id") String id);
 
 
-    @GET("catalog/current")
-    Flowable<SortType_Itembean>  getSortType_ItemList(@Query("id") String id);
 }
