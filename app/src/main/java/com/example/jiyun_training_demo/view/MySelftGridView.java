@@ -2,6 +2,7 @@ package com.example.jiyun_training_demo.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
+import com.example.jiyun_training_demo.utils.SystemUtils;
 
 import java.util.List;
 
@@ -48,9 +50,15 @@ public class MySelftGridView extends LinearLayout
      * 列数
      */
     int columnuNum = 3;
+    int itemWidth =0;
+
+    private static final String TAG = "MySelftGridView";
 
     public void initMyGridView(List<CataLogItemBean.DataBean.CurrentCategoryBean.SubCategoryListBean>  itemList){
 
+        itemWidth = (SystemUtils.getScreenWidth(getContext())-SystemUtils.dip2px(getContext(),100f))/columnuNum;
+
+        Log.d(TAG, "initMyGridView: "+itemWidth);
 
         for (int i = 0; i < itemList.size(); i++) {
 
@@ -64,11 +72,12 @@ public class MySelftGridView extends LinearLayout
 
             LayoutParams layoutParams =  new  LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
             // 为了item 等分
-            layoutParams.weight= 1;
+//            layoutParams.weight= 1;
+            layoutParams.width = itemWidth;
             item.setLayoutParams(layoutParams);
 
 
-            if (i%3==0){
+            if (i%columnuNum==0){
 
                 linearLayout = new LinearLayout(getContext());
                 linearLayout.setOrientation(HORIZONTAL);
