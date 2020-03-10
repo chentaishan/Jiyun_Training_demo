@@ -31,6 +31,8 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     private TextView mTitle;
     private TextView mTitleType;
     private LinearLayout mContent;
+    private List<CatalogBean.DataBean.CategoryListBean> categoryList;
+    private MySelftGridView mySelftGridView;
 
     @Override
     protected void initData() {
@@ -59,6 +61,8 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
             @Override
             public void onTabSelected(TabView tab, int position) {
 
+                CatalogBean.DataBean.CategoryListBean categoryListBean = categoryList.get(position);
+                presenter.getTypeList(categoryListBean.getId() + "");
             }
 
             @Override
@@ -78,7 +82,7 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     @Override
     public void updateUISuccess(CatalogBean result) {
 
-        final List<CatalogBean.DataBean.CategoryListBean> categoryList = result.getData().getCategoryList();
+        categoryList = result.getData().getCategoryList();
 
 
         mTablayout.setTabAdapter(new TabAdapter() {
@@ -114,7 +118,9 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     @Override
     public void updateSubItem(CataLogItemBean cataLogItemBean) {
 
-
+        if (mySelftGridView != null) {
+            mContent.removeView(mySelftGridView);
+        }
 
         CataLogItemBean.DataBean.CurrentCategoryBean currentCategory = cataLogItemBean.getData().getCurrentCategory();
 
@@ -122,7 +128,7 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
         mTitle.setText(currentCategory.getFront_name());
         mTitleType.setText(cataLogItemBean.getData().getCurrentCategory().getName());
 
-        MySelftGridView mySelftGridView = new MySelftGridView(getActivity());
+        mySelftGridView = new MySelftGridView(getActivity());
         mySelftGridView.initMyGridView(cataLogItemBean.getData().getCurrentCategory().getSubCategoryList());
 
         mContent.addView(mySelftGridView);
