@@ -53,5 +53,5 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'  //预览版
 //    implementation 'com.jakewharton:butterknife:8.8.1'
 //    implementation 'com.jakewharton:butterknife-compiler:8.8.1'
-
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
 }

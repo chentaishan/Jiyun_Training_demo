@@ -4,6 +4,8 @@ import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.bean.LoginBean;
 import com.example.jiyun_training_demo.bean.RegisterBean;
+import com.example.jiyun_training_demo.bean.SortTypeBean;
+import com.example.jiyun_training_demo.bean.SortType_Itembean;
 import com.example.jiyun_training_demo.bean.TopicBean;
 
 import io.reactivex.Flowable;
@@ -12,10 +14,11 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface HomeService {
 
-    public static String baseUrl="https://cdwan.cn/api/";
+   String baseUrl="https://cdwan.cn/api/";
 
     @GET("index")
     Flowable<ComonResult<HomeBean>> getHome();
@@ -33,5 +36,13 @@ public interface HomeService {
     @POST("auth/register")
     @Headers({"Client-Type:ANDROID"})
     Flowable<ComonResult<RegisterBean>> registerInfo(@Field("nickname") String name, @Field("password") String password);
+//    String baseUrl="https://cdwan.cn/api/";
 
+//    https://cdwan.cn/api/catalog/index
+    @GET("catalog/index")
+    Flowable<ComonResult<SortTypeBean>>  getSortTypeList();
+
+
+    @GET("catalog/current")
+    Flowable<SortType_Itembean>  getSortType_ItemList(@Query("id") String id);
 }
