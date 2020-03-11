@@ -41,10 +41,10 @@ public class Home_CategoryView extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    public void initView(CategoryListBean categoryListBean) {
+    public void initTitleView(String name) {
 
         TextView textView = new TextView(getContext());
-        textView.setText(categoryListBean.getName());
+        textView.setText(name);
         textView.setGravity(Gravity.CENTER);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0,44,0,44);
@@ -52,20 +52,23 @@ public class Home_CategoryView extends LinearLayout {
         addView(textView);
 
 
-        initList(categoryListBean.getGoodsList());
+
 
     }
+
 
     int imageWidth = 0;
     LinearLayout rowLinearlayout;
 
-    private void initList(final List<CategoryListBean.GoodsListBean> goodsListBeans) {
+    public <T> void initGridList(final List<T> listBeans,IUpdateUIListener iUpdateUIListener) {
         imageWidth = SystemUtils.getScreenWidth(getContext())-(30*3);
         imageWidth= imageWidth/2;
-        for (int i = 0; i < goodsListBeans.size(); i++) {
+        removeAllViews();
+        for (int i = 0; i < listBeans.size(); i++) {
 
+            T t = listBeans.get(i);
 
-            CategoryListBean.GoodsListBean hotGoodsListBean = goodsListBeans.get(i);
+//            CategoryListBean.GoodsListBean hotGoodsListBean = goodsListBeans.get(i);
 
             //获取子布局，设置宽度 高度
             View item = LayoutInflater.from(getContext()).inflate(R.layout.category_goods_item, null);
@@ -86,9 +89,11 @@ public class Home_CategoryView extends LinearLayout {
             TextView title = item.findViewById(R.id.title);
             TextView pTitle = item.findViewById(R.id.price);
 
-            Glide.with(getContext()).load(hotGoodsListBean.getList_pic_url()).into(imageView);
-            title.setText(hotGoodsListBean.getName());
-            pTitle.setText(hotGoodsListBean.getRetail_price() + "元起");
+//            Glide.with(getContext()).load(hotGoodsListBean.getList_pic_url()).into(imageView);
+//            title.setText(hotGoodsListBean.getName());
+//            pTitle.setText(hotGoodsListBean.getRetail_price() + "元起");
+
+            iUpdateUIListener.setItem(t,imageView,title,pTitle);
 
             if (i%2==0){
                 rowLinearlayout = new LinearLayout(getContext());
@@ -113,14 +118,15 @@ public class Home_CategoryView extends LinearLayout {
 
             }
 
-
-
-
         }
 
     }
+    IUpdateUIListener iUpdateUIListener;
 
+    public interface IUpdateUIListener<T>{
 
+        void setItem(T t,ImageView img,TextView title,TextView price);
+    }
 
 
 }

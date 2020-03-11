@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
@@ -98,7 +99,19 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
             Home_CategoryView home_categoryView = new Home_CategoryView(getContext());
 
-            home_categoryView.initView(categoryList.get(i));
+            home_categoryView.initTitleView(categoryList.get(i).getName());
+            home_categoryView.initGridList(categoryList.get(i).getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
+                @Override
+                public void setItem(Object o, ImageView img, TextView title, TextView price) {
+//                    List<CategoryListBean.GoodsListBean> goodsList = categoryList.get(i).getGoodsList();
+                    CategoryListBean.GoodsListBean goodsListBean = (CategoryListBean.GoodsListBean) o;
+
+                    Glide.with(getContext()).load(goodsListBean.getList_pic_url()).into(img);
+                    title.setText(goodsListBean.getName());
+                    price.setText(goodsListBean.getRetail_price() + "元起");
+
+                }
+            });
 
             mCategorylist.addView(home_categoryView);
 

@@ -18,6 +18,12 @@ import com.example.jiyun_training_demo.presenter.RegisterPresenter;
 public class RegisterActivity  extends BaseActivity<RegisterPresenter> implements IRegisterContract.View {
     EditText name,psw;
     Button  register;
+
+    @Override
+    protected void initData() {
+
+    }
+
     @Override
     protected RegisterPresenter initPresenter() {
         return new RegisterPresenter();

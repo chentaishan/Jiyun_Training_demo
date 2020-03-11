@@ -9,6 +9,7 @@ import com.example.jiyun_training_demo.bean.RegisterBean;
 import com.example.jiyun_training_demo.bean.SortTypeBean;
 import com.example.jiyun_training_demo.bean.SortType_Itembean;
 import com.example.jiyun_training_demo.bean.TopicBean;
+import com.example.jiyun_training_demo.bean.TypeList2SubItemListBean;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
@@ -47,6 +48,12 @@ public interface HomeService {
 
     @GET("catalog/current?")
     Flowable<CataLogItemBean> getRightDataList(@Query("id") String id);
+
+    //获取各个类型下得列表数据
+  @GET("goods/list?")
+  Flowable<TypeList2SubItemListBean> getType2ItemList(@Query("categoryId") String id);
+// https://cdwan.cn/api/goods/list?categoryId=1005007&page=1&size=100
+
 
 
 }

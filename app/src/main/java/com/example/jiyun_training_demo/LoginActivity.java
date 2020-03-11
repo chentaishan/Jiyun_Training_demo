@@ -21,6 +21,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     EditText name,psw;
     Button login,register;
+
+    @Override
+    protected void initData() {
+
+    }
+
     @Override
     protected LoginPresenter initPresenter() {
         return new LoginPresenter();

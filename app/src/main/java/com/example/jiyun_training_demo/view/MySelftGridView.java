@@ -1,6 +1,8 @@
 package com.example.jiyun_training_demo.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +16,12 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
+import com.example.jiyun_training_demo.TypeSubMainActivity;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
+import com.example.jiyun_training_demo.bean.SubCategoryListBean;
 import com.example.jiyun_training_demo.utils.SystemUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySelftGridView extends LinearLayout
@@ -54,7 +59,7 @@ public class MySelftGridView extends LinearLayout
 
     private static final String TAG = "MySelftGridView";
 
-    public void initMyGridView(List<CataLogItemBean.DataBean.CurrentCategoryBean.SubCategoryListBean>  itemList){
+    public void initMyGridView(final List<SubCategoryListBean>  itemList){
 
         itemWidth = (SystemUtils.getScreenWidth(getContext())-SystemUtils.dip2px(getContext(),100f))/columnuNum;
 
@@ -62,9 +67,19 @@ public class MySelftGridView extends LinearLayout
 
         for (int i = 0; i < itemList.size(); i++) {
 
-            CataLogItemBean.DataBean.CurrentCategoryBean.SubCategoryListBean subCategoryListBean = itemList.get(i);
+             final SubCategoryListBean subCategoryListBean = itemList.get(i);
 
             View item = LayoutInflater.from(getContext()).inflate(R.layout.sort_item,null);
+
+            item.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), TypeSubMainActivity.class);
+                    intent.putParcelableArrayListExtra("itemList", (ArrayList<? extends Parcelable>) itemList);
+                    getContext().startActivity(intent);
+                }
+            });
+
             ImageView img  = item.findViewById(R.id.img);
             TextView subTitle  = item.findViewById(R.id.sub_title);
             Glide.with(getContext()).load(subCategoryListBean.getWap_banner_url()).into(img);
