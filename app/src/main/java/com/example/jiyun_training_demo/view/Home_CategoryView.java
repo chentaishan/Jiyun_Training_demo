@@ -3,6 +3,7 @@ package com.example.jiyun_training_demo.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ import com.example.jiyun_training_demo.utils.SystemUtils;
 import java.util.List;
 
 /**
- *  分类卡片
+ * 分类卡片
  */
 public class Home_CategoryView extends LinearLayout {
     public Home_CategoryView(Context context) {
@@ -47,85 +48,103 @@ public class Home_CategoryView extends LinearLayout {
         textView.setText(name);
         textView.setGravity(Gravity.CENTER);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0,44,0,44);
+        layoutParams.setMargins(0, 44, 0, 44);
         textView.setLayoutParams(layoutParams);
         addView(textView);
-
-
 
 
     }
 
 
-    int imageWidth = 0;
-    LinearLayout rowLinearlayout;
+    private int columnNum = 2;
+    private static int imageWidth = 0;
+    private LinearLayout rowLinearlayout;
+    int totalDividerWidth =30*3;
 
-    public <T> void initGridList(final List<T> listBeans,IUpdateUIListener iUpdateUIListener) {
-        imageWidth = SystemUtils.getScreenWidth(getContext())-(30*3);
-        imageWidth= imageWidth/2;
+    /**
+     * 设置所有间隔距离，方便计算item的宽度
+     * @param totalDividerWidth
+     */
+    public void setTotalDividerWidth(int totalDividerWidth) {
+        this.totalDividerWidth = totalDividerWidth;
+    }
+
+    /**
+     * 设置列数
+     *
+     * @param columnNum
+     */
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
+    }
+
+    public <T> void initGridList(final List<T> listBeans,IUpdateUIListener iUpdateUIListener) throws IllegalAccessException {
+        if (columnNum==0){
+            throw new IllegalAccessException("请设置列数！");
+        }
+        this.iUpdateUIListener = iUpdateUIListener;
+        imageWidth = SystemUtils.getScreenWidth(getContext()) - totalDividerWidth;
+        imageWidth = imageWidth / columnNum;
         removeAllViews();
         for (int i = 0; i < listBeans.size(); i++) {
 
             T t = listBeans.get(i);
 
-//            CategoryListBean.GoodsListBean hotGoodsListBean = goodsListBeans.get(i);
+            View item = initItemView(t);
 
-            //获取子布局，设置宽度 高度
-            View item = LayoutInflater.from(getContext()).inflate(R.layout.category_goods_item, null);
-            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(imageWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-            item.setLayoutParams(linearParams);
-
-            // 设置图片宽高 正方形
-            ImageView imageView = item.findViewById(R.id.image);
-
-            LinearLayout.LayoutParams layoutParams = (LayoutParams) imageView.getLayoutParams();
-            layoutParams.width =imageWidth;
-            layoutParams.height = imageWidth;
-
-            imageView.setBackgroundColor(Color.parseColor("#F0EBE9"));
-            imageView.setLayoutParams(layoutParams);
-
-            TextView title = item.findViewById(R.id.title);
-            TextView pTitle = item.findViewById(R.id.price);
-
-//            Glide.with(getContext()).load(hotGoodsListBean.getList_pic_url()).into(imageView);
-//            title.setText(hotGoodsListBean.getName());
-//            pTitle.setText(hotGoodsListBean.getRetail_price() + "元起");
-
-            iUpdateUIListener.setItem(t,imageView,title,pTitle);
-
-            if (i%2==0){
+            if (i % columnNum == 0) {
                 rowLinearlayout = new LinearLayout(getContext());
                 rowLinearlayout.setOrientation(HORIZONTAL);
                 LayoutParams layout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layout.setMargins(30,0,0,0);
+                layout.setMargins(30, 0, 0, 0);
                 rowLinearlayout.setLayoutParams(layout);
 
                 rowLinearlayout.addView(item);
 
                 addView(rowLinearlayout);
 
-            }else{
+            } else {
                 //添加间隔线
                 View view = new View(getContext());
                 view.setLayoutParams(new LayoutParams(30, ViewGroup.LayoutParams.MATCH_PARENT));
-//                view.setBackgroundColor(Color.parseColor("#ffffff"));
-                rowLinearlayout. addView(view);
-
+                rowLinearlayout.addView(view);
                 rowLinearlayout.addView(item);
-
-
             }
 
         }
 
     }
+    private <T>View initItemView(T t){
+        //获取子布局，设置宽度 高度
+
+        View item = LayoutInflater.from(getContext()).inflate(R.layout.category_goods_item, null);
+        LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(imageWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+        item.setLayoutParams(linearParams);
+
+        // 设置图片宽高 正方形
+        ImageView imageView = item.findViewById(R.id.image);
+
+        LinearLayout.LayoutParams layoutParams = (LayoutParams) imageView.getLayoutParams();
+        layoutParams.width = imageWidth;
+        layoutParams.height = imageWidth;
+
+        imageView.setBackgroundColor(Color.parseColor("#F0EBE9"));
+        imageView.setLayoutParams(layoutParams);
+
+        TextView title = item.findViewById(R.id.title);
+        TextView pTitle = item.findViewById(R.id.price);
+
+        iUpdateUIListener.setItem(t, imageView, title, pTitle);
+
+
+        return item;
+    }
+
     IUpdateUIListener iUpdateUIListener;
 
-    public interface IUpdateUIListener<T>{
+    public interface IUpdateUIListener<T> {
 
-        void setItem(T t,ImageView img,TextView title,TextView price);
+        void setItem(T t, ImageView img, TextView title, TextView price);
     }
 
 

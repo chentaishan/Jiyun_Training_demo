@@ -97,17 +97,21 @@ public class TypeSubMainActivity extends BaseActivity<TypeSubMainPresenter> impl
     @Override
     public void updateUISuccess(TypeList2SubItemListBean result) {
 
-        mCategorylist.initGridList(result.getData().getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
-            @Override
-            public void setItem(Object o, ImageView img, TextView title, TextView price) {
-                TypeList2SubItemListBean.DataBeanX.GoodsListBean   goodsListBean = (TypeList2SubItemListBean.DataBeanX.GoodsListBean) o;
+        try {
+            mCategorylist.initGridList(result.getData().getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
+                @Override
+                public void setItem(Object o, ImageView img, TextView title, TextView price) {
+                    TypeList2SubItemListBean.DataBeanX.GoodsListBean   goodsListBean = (TypeList2SubItemListBean.DataBeanX.GoodsListBean) o;
 
-                Glide.with(TypeSubMainActivity.this).load(goodsListBean.getList_pic_url()).into(img);
-                title.setText(goodsListBean.getName());
-                price.setText(goodsListBean.getRetail_price() + "元起");
+                    Glide.with(TypeSubMainActivity.this).load(goodsListBean.getList_pic_url()).into(img);
+                    title.setText(goodsListBean.getName());
+                    price.setText(goodsListBean.getRetail_price() + "元起");
 
-            }
-        });
+                }
+            });
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
