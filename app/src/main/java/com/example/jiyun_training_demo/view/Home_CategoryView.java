@@ -24,6 +24,10 @@ import java.util.List;
 
 /**
  * 分类卡片
+ * 功能：
+ * 实现动态列数的网格布局
+ * 实现头部文字类型显示
+ * 实现item的点击事件
  */
 public class Home_CategoryView extends LinearLayout {
     public Home_CategoryView(Context context) {
@@ -59,10 +63,11 @@ public class Home_CategoryView extends LinearLayout {
     private int columnNum = 2;
     private static int imageWidth = 0;
     private LinearLayout rowLinearlayout;
-    int totalDividerWidth =30*3;
+    int totalDividerWidth = 30 * 3;
 
     /**
      * 设置所有间隔距离，方便计算item的宽度
+     *
      * @param totalDividerWidth
      */
     public void setTotalDividerWidth(int totalDividerWidth) {
@@ -78,8 +83,8 @@ public class Home_CategoryView extends LinearLayout {
         this.columnNum = columnNum;
     }
 
-    public <T> void initGridList(final List<T> listBeans,IUpdateUIListener iUpdateUIListener) throws IllegalAccessException {
-        if (columnNum==0){
+    public <T> void initGridList(final List<T> listBeans, IUpdateUIListener iUpdateUIListener) throws IllegalAccessException {
+        if (columnNum == 0) {
             throw new IllegalAccessException("请设置列数！");
         }
         this.iUpdateUIListener = iUpdateUIListener;
@@ -114,10 +119,11 @@ public class Home_CategoryView extends LinearLayout {
         }
 
     }
-    private <T>View initItemView(T t){
+
+    private <T> View initItemView(final T t) {
         //获取子布局，设置宽度 高度
 
-        View item = LayoutInflater.from(getContext()).inflate(R.layout.category_goods_item, null);
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.category_goods_item, null);
         LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(imageWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
         item.setLayoutParams(linearParams);
 
@@ -133,9 +139,20 @@ public class Home_CategoryView extends LinearLayout {
 
         TextView title = item.findViewById(R.id.title);
         TextView pTitle = item.findViewById(R.id.price);
+        if (iUpdateUIListener != null) {
 
-        iUpdateUIListener.setItem(t, imageView, title, pTitle);
+            iUpdateUIListener.setItem(t, imageView, title, pTitle);
+        }
 
+        item.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (iUpdateUIListener != null) {
+
+                    iUpdateUIListener.itemClick(t);
+                }
+            }
+        });
 
         return item;
     }
@@ -145,6 +162,8 @@ public class Home_CategoryView extends LinearLayout {
     public interface IUpdateUIListener<T> {
 
         void setItem(T t, ImageView img, TextView title, TextView price);
+
+        void itemClick(T t);
     }
 
 

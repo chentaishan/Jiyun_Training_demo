@@ -112,6 +112,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                         price.setText(goodsListBean.getRetail_price() + "元起");
 
                     }
+
+                    @Override
+                    public void itemClick(Object o) {
+
+                    }
                 });
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
