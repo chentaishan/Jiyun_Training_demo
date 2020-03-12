@@ -3,4 +3,21 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <string name="css_goods">
+        html,body,p{
+            padding:0px;
+            margin:0px;
+            text-align:center;
+        }
+        img{
+            width:100%;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+        }
+    </string>
 </resources>

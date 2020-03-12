@@ -1,5 +1,6 @@
 package com.example.jiyun_training_demo;
 
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -111,7 +112,11 @@ public class TypeSubMainActivity extends BaseActivity<TypeSubMainPresenter> impl
 
                 @Override
                 public void itemClick(Object o) {
+                    TypeList2SubItemListBean.DataBeanX.GoodsListBean   goodsListBean = (TypeList2SubItemListBean.DataBeanX.GoodsListBean) o;
 
+                    Intent intent = new Intent(TypeSubMainActivity.this,DetailsGoodsActivity.class);
+                    intent.putExtra("id",goodsListBean.getId());
+                    startActivity(intent);
                 }
             });
         } catch (IllegalAccessException e) {

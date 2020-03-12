@@ -3,6 +3,7 @@ package com.example.jiyun_training_demo.service;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
 import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
+import com.example.jiyun_training_demo.bean.DetailsBean;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.bean.LoginBean;
 import com.example.jiyun_training_demo.bean.RegisterBean;
@@ -50,10 +51,10 @@ public interface HomeService {
     Flowable<CataLogItemBean> getRightDataList(@Query("id") String id);
 
     //获取各个类型下得列表数据
-  @GET("goods/list?")
-  Flowable<TypeList2SubItemListBean> getType2ItemList(@Query("categoryId") String id);
-// https://cdwan.cn/api/goods/list?categoryId=1005007&page=1&size=100
+    @GET("goods/list?")
+    Flowable<TypeList2SubItemListBean> getType2ItemList(@Query("categoryId") String id);
 
-
+    @GET("goods/detail?")
+    Flowable<ComonResult<DetailsBean>> getDetails(@Query("id") String id);
 
 }
