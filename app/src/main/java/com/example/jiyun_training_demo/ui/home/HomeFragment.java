@@ -73,6 +73,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void updateUISuccess(ComonResult<HomeBean> results) {
 
+        long start = System.currentTimeMillis();
+
         banner.setImages(results.getData().getBanner()).setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
@@ -125,8 +127,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             mCategorylist.addView(home_categoryView);
 
         }
-
-        Log.d(TAG, "updateUISuccess: " + results.getData().toString());
+        long end = System.currentTimeMillis();
+        Log.d(TAG, "updateUISuccess: time=" + (end-start));
     }
 
     @Override

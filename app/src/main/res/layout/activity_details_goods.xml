@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,115 +21,195 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="222dp" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/col_gray_word">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
                     android:text="·30天无忧退货"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"></TextView>
+                    app:layout_constraintLeft_toLeftOf="parent"></TextView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    android:gravity="center_vertical"
                     android:text="·48小时快速退款"
-                    android:gravity="center_vertical"></TextView>
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></TextView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginRight="20dp"
-                    android:text="·满88元免邮费"
                     android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"></TextView>
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    android:text="·满88元免邮费"
+                    app:layout_constraintRight_toRightOf="parent"></TextView>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <TextView
                         android:id="@+id/txt_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="简约性地毯"
+                        android:textSize="20sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="简约性地毯"
-                        android:textSize="20sp"></TextView>
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
                     <TextView
                         android:id="@+id/txt_des"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="简约性地毯"
+                        android:textColor="@color/col_gray_word"
+                        android:textSize="16sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_title"
-                        android:textColor="@color/col_gray_word"
-                        android:text="简约性地毯"
-                        android:textSize="16sp"
-                        ></TextView>
+                        app:layout_constraintTop_toBottomOf="@id/txt_title"></TextView>
+
                     <TextView
                         android:id="@+id/txt_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="￥88"
+                        android:textColor="@color/red"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="￥88"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorAccent"></TextView>
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginLeft="@dimen/padding_goods_buy"
+                        android:background="@color/col_gray_line"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:background="@color/col_gray_line"></View>
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"></View>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_nums"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     app:layout_constraintBottom_toBottomOf="parent">
+
                     <TextView
                         android:id="@+id/txt_nums"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginLeft="@dimen/padding_goods_buy"
                         android:text="请选择购买数量"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginRight="@dimen/padding_goods_buy"
                         android:text=">"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include layout="@layout/goods_sub_info" />
+
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:id="@+id/txt_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+
+            <com.example.jiyun_training_demo.view.MySelftGridView
+                android:id="@+id/selfview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/col_white"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:id="@+id/txt_collect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="收藏"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/txt_cart"></TextView>
+
+        <TextView
+            android:id="@+id/txt_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="购物车"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/txt_collect"
+            app:layout_constraintRight_toLeftOf="@id/txt_buy"></TextView>
+
+        <TextView
+            android:id="@+id/txt_buy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="立即购买"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/txt_cart"
+            app:layout_constraintRight_toLeftOf="@id/txt_addCart"></TextView>
+
+        <TextView
+            android:id="@+id/txt_addCart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:gravity="center"
+            android:text="加入购物车"
+            android:textColor="@color/col_white"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/txt_buy"
+            app:layout_constraintRight_toRightOf="parent"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

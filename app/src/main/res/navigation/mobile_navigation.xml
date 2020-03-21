@@ -22,7 +22,11 @@
         android:name="com.example.jiyun_training_demo.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.example.jiyun_training_demo.ui.home.CartFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/owner_fragment" />
     <fragment
         android:id="@+id/navigation_owner"
         android:name="com.example.jiyun_training_demo.ui.home.OwnerFragment"

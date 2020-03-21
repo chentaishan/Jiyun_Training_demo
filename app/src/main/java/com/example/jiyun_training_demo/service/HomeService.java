@@ -1,5 +1,6 @@
 package com.example.jiyun_training_demo.service;
 
+import com.example.jiyun_training_demo.bean.CartBean;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
 import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
@@ -56,5 +57,10 @@ public interface HomeService {
 
     @GET("goods/detail?")
     Flowable<ComonResult<DetailsBean>> getDetails(@Query("id") String id);
+
+//    https://cdwan.cn/api/cart/index
+    @GET("cart/index")
+    @Headers("X-Nideshop-Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE1ODMxMTA3MDh9.jfCRTkgEVWwFKTFhvRq8wDMj4-5HeKh2P9dDFcj5I0I")
+    Flowable<ComonResult<CartBean>> getCartDataList();
 
 }
