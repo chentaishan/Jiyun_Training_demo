@@ -13,10 +13,11 @@ import android.widget.Toast;
 import com.example.jiyun_training_demo.base.BaseActivity;
 import com.example.jiyun_training_demo.base.BasePresenter;
 import com.example.jiyun_training_demo.bean.ComonResult;
+import com.example.jiyun_training_demo.bean.LoginBean;
 import com.example.jiyun_training_demo.contract.ILoginContract;
 import com.example.jiyun_training_demo.presenter.LoginPresenter;
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginContract.View {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginContract.View<LoginBean>{
 
 
     EditText name,psw;
@@ -67,10 +68,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     private static final String TAG = "LoginActivity";
     @Override
-    public void updateUISuccess(ComonResult results) {
+    public void updateUISuccess(ComonResult<LoginBean> results) {
 
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this,MainActivity.class));
+        Intent intent = new Intent();
+        intent.putExtra("name",results.getData().getUserInfo().getNickname());
+        setResult(99,intent);
         finish();
     }
 
