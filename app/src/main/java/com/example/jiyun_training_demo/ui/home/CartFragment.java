@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,8 @@ import com.example.jiyun_training_demo.bean.CartBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.contract.CartContract;
 import com.example.jiyun_training_demo.presenter.CartPresenter;
+
+import java.util.ArrayList;
 
 public class CartFragment extends BaseFragment<CartPresenter> implements View.OnClickListener, CartContract.View<CartBean> {
 
@@ -47,6 +50,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
         car_recycler = (RecyclerView) itemView.findViewById(R.id.car_recycler);
 
         car_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        car_recycler.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
         carRlvAdapter = new CarRlvAdapter(getContext());
         car_recycler.setAdapter(carRlvAdapter);
@@ -57,6 +61,28 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
         mBtnCarPressCar.setOnClickListener(this);
         mTvEditStateCar = (TextView) itemView.findViewById(R.id.car_tv_edit_state);
         mCarLeadRel = (RelativeLayout) itemView.findViewById(R.id.rel_car_lead);
+
+        mCbAllCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCbAllCar.isChecked()){
+                    carRlvAdapter.setSelectAll(true);
+
+                }else{
+                    carRlvAdapter.setSelectAll(false);
+
+                }
+
+            }
+        });
+
+        carRlvAdapter.setiUpdateListener(new CarRlvAdapter.IUpdateListener() {
+            @Override
+            public void updatePrice(int[] price) {
+                setAllPrice(price);
+            }
+        });
+
     }
 
     @Override
@@ -74,7 +100,12 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
                 break;
         }
     }
+    private void setAllPrice( int [] price) {
 
+        mTvCountPriceCar.setText("总价："+price[0]+"元");
+        mCbAllCar.setText("全部（"+price[1]+"）");
+
+    }
     @Override
     public void updateUISuccess(ComonResult<CartBean> results) {
 
