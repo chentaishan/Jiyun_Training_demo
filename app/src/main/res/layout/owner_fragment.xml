@@ -48,8 +48,8 @@
         android:id="@+id/gridview"
         android:numColumns="3"
         android:background="#D3D3D3"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1px"
+        android:verticalSpacing="1px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
