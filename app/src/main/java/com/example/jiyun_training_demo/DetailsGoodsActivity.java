@@ -23,7 +23,7 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.List;
 
-public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> implements IDetailsGoodsContract.View<DetailsBean> {
+public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> implements IDetailsGoodsContract.View<DetailsBean>, View.OnClickListener {
 
 
     private Banner mBanner;
@@ -51,6 +51,14 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
     private TextView mAddCartTxt;
     private MySelftGridView mSelfview;
     private LinearLayout mLayoutAttribute;
+
+    private ImageView mImg;
+    private TextView mPrice;
+    private ImageView mClose;
+    private LinearLayout mCartLayoutAdd;
+    private DetailsBean.InfoBean infoBean;
+
+    int productId;
 
     @Override
     protected void initData() {
@@ -84,6 +92,9 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
         mQuestionTxt = (LinearLayout) findViewById(R.id.txt_question);
         mSelfview = (MySelftGridView) findViewById(R.id.selfview);
         mLayoutAttribute = (LinearLayout) findViewById(R.id.attribute_layout);
+        mAddCartTxt.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -99,6 +110,10 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
     @Override
     public void updateUISuccess(ComonResult<DetailsBean> results) {
 
+        if (results.getData().getProductList().size() > 0) {
+
+            productId = results.getData().getProductList().get(0).getId();
+        }
         // banner 处理
         mBanner.setImages(results.getData().getGallery()).setImageLoader(new ImageLoader() {
             @Override
@@ -159,6 +174,7 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
     //商品介绍描述信息
     private void updateWebView(DetailsBean.InfoBean infoBean) {
 
+        this.infoBean = infoBean;
         String css_str = getResources().getString(R.string.css_goods);
         StringBuilder sb = new StringBuilder();
         sb.append("<html><head>");
@@ -179,5 +195,66 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
 //            urlList.add(url);
 //            Log.i("url",url);
 //        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.txt_addCart:
+                if (mCartLayoutAdd != null && mCartLayoutAdd.getVisibility() == View.VISIBLE) {
+
+                    presenter.addGoodsToCart(infoBean.getId() + "", currCartPopNums + "", productId + "");
+
+                } else {
+                    initAddCartPop();
+
+                }
+                break;
+        }
+    }
+
+    int currCartPopNums = 1;
+
+    /**
+     * 弹出添加购物车的弹窗
+     */
+    private void initAddCartPop() {
+
+        mCartLayoutAdd = (LinearLayout) findViewById(R.id.add_cart_layout);
+        mCartLayoutAdd.setVisibility(View.VISIBLE);
+        mImg = (ImageView) findViewById(R.id.img);
+        mPrice = (TextView) findViewById(R.id.price);
+        TextView jianBtn = (TextView) findViewById(R.id.jian);
+        final TextView numsTv = (TextView) findViewById(R.id.nums);
+        TextView addBtn = (TextView) findViewById(R.id.add);
+        mClose = (ImageView) findViewById(R.id.close);
+
+        if (this.infoBean != null) {
+            String url = infoBean.getPrimary_pic_url();
+            Glide.with(this).load(url).into(mImg);
+            mPrice.setText("价格：￥ : " + infoBean.getRetail_price());
+        }
+        mClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCartLayoutAdd.setVisibility(View.GONE);
+            }
+        });
+        jianBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currCartPopNums > 1) {
+                    currCartPopNums--;
+                    numsTv.setText(currCartPopNums + "");
+                }
+            }
+        });
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currCartPopNums++;
+                numsTv.setText(currCartPopNums + "");
+            }
+        });
     }
 }

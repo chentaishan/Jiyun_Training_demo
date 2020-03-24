@@ -65,7 +65,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsGoodsContract.View> 
                     @Override
                     public void onNext(ComonResult<AddCartBean> addCartBean) {
 
-                        view.updateUISuccess(addCartBean);
+//                        view.updateUISuccess(addCartBean);
                     }
 
                     @Override

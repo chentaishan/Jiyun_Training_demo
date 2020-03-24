@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -28,7 +29,7 @@ import retrofit2.http.QueryMap;
 
 public interface HomeService {
 
-   String baseUrl="https://cdwan.cn/api/";
+    String baseUrl = "https://cdwan.cn/api/";
 
     @GET("index")
     Flowable<ComonResult<HomeBean>> getHome();
@@ -49,7 +50,6 @@ public interface HomeService {
 //    String baseUrl="https://cdwan.cn/api/";
 
 
-
     @GET("catalog/index")
     Flowable<CatalogBean> getLeftDataList();
 
@@ -63,9 +63,11 @@ public interface HomeService {
     @GET("goods/detail?")
     Flowable<ComonResult<DetailsBean>> getDetails(@Query("id") String id);
 
-     @GET("cart/add")
-    Flowable<ComonResult<AddCartBean>> addGoodsToCart(@Header("X-Nideshop-Token") String token, @QueryMap HashMap<String,String> params);
-//    https://cdwan.cn/api/cart/index
+    @POST("cart/add")
+    @FormUrlEncoded
+    Flowable<ComonResult<AddCartBean>> addGoodsToCart(@Header("X-Nideshop-Token") String token, @FieldMap HashMap<String, String> params);
+
+    //    https://cdwan.cn/api/cart/index
     @GET("cart/index")
     Flowable<ComonResult<CartBean>> getCartDataList(@Header("X-Nideshop-Token") String token);
 
