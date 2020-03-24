@@ -11,6 +11,7 @@ import com.example.jiyun_training_demo.service.HomeService;
 import com.example.jiyun_training_demo.service.HttpManager;
 import com.example.jiyun_training_demo.utils.CallBackSubscriber;
 import com.example.jiyun_training_demo.utils.RxUtils;
+import com.example.jiyun_training_demo.utils.SpUtils;
 
 import io.reactivex.subscribers.ResourceSubscriber;
 
@@ -29,6 +30,7 @@ public class LoginPresenter extends BasePresenter<ILoginContract.View> implement
                     public void onNext(ComonResult<LoginBean> loginBeanComonResult) {
                         if (loginBeanComonResult.getErrno() == 0) {
                             view.updateUISuccess(loginBeanComonResult);
+                            SpUtils.getInstance().setValue("token",loginBeanComonResult.getData().getToken());
                         } else {
                             view.updateUIFailed(loginBeanComonResult.getErrmsg());
                         }

@@ -16,5 +16,6 @@ public interface IDetailsGoodsContract {
     interface Presenter extends IBasePresenter<IDetailsGoodsContract.View> {
 
         void getDetailsBean(String id );
+        void addGoodsToCart( String goodsId,String number,String productId);
     }
 }

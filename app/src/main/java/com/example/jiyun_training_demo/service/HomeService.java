@@ -1,5 +1,6 @@
 package com.example.jiyun_training_demo.service;
 
+import com.example.jiyun_training_demo.bean.AddCartBean;
 import com.example.jiyun_training_demo.bean.CartBean;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
 import com.example.jiyun_training_demo.bean.CatalogBean;
@@ -13,13 +14,17 @@ import com.example.jiyun_training_demo.bean.SortType_Itembean;
 import com.example.jiyun_training_demo.bean.TopicBean;
 import com.example.jiyun_training_demo.bean.TypeList2SubItemListBean;
 
+import java.util.HashMap;
+
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface HomeService {
 
@@ -58,9 +63,10 @@ public interface HomeService {
     @GET("goods/detail?")
     Flowable<ComonResult<DetailsBean>> getDetails(@Query("id") String id);
 
+     @GET("cart/add")
+    Flowable<ComonResult<AddCartBean>> addGoodsToCart(@Header("X-Nideshop-Token") String token, @QueryMap HashMap<String,String> params);
 //    https://cdwan.cn/api/cart/index
     @GET("cart/index")
-    @Headers("X-Nideshop-Token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE1ODMxMTA3MDh9.jfCRTkgEVWwFKTFhvRq8wDMj4-5HeKh2P9dDFcj5I0I")
-    Flowable<ComonResult<CartBean>> getCartDataList();
+    Flowable<ComonResult<CartBean>> getCartDataList(@Header("X-Nideshop-Token") String token);
 
 }

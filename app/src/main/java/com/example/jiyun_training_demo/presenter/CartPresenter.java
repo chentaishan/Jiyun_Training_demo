@@ -8,6 +8,7 @@ import com.example.jiyun_training_demo.contract.CartContract;
 import com.example.jiyun_training_demo.service.HomeService;
 import com.example.jiyun_training_demo.service.HttpManager;
 import com.example.jiyun_training_demo.utils.RxUtils;
+import com.example.jiyun_training_demo.utils.SpUtils;
 
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.Retrofit;
@@ -17,7 +18,8 @@ public class CartPresenter extends BasePresenter<CartContract.View> implements C
     public void getCartDataList() {
         final Retrofit retrofit = HttpManager.getInstance().getRetrofit(HomeService.baseUrl);
 
-        ResourceSubscriber<ComonResult<CartBean>> resourceSubscriber = retrofit.create(HomeService.class).getCartDataList()
+        String tokean = SpUtils.getInstance().getString("token");
+        ResourceSubscriber<ComonResult<CartBean>> resourceSubscriber = retrofit.create(HomeService.class).getCartDataList(tokean)
 
                 .compose(RxUtils.<ComonResult<CartBean>>rxScheduler())
                 .subscribeWith(new ResourceSubscriber<ComonResult<CartBean>>() {
