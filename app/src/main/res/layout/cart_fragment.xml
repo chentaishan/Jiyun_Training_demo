@@ -55,7 +55,7 @@
             android:layout_margin="10dp"
             android:layout_toLeftOf="@id/car_btn_car_press"
             android:text="编辑"
-            android:textSize="22sp" />
+            android:textSize="@dimen/sp_18" />
 
     </RelativeLayout>
 </LinearLayout>
