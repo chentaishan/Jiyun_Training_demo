@@ -9,4 +9,6 @@
     <dimen name="txt_size_good_param">24sp</dimen>
     <dimen name="margin_default_lr">20dp</dimen>
     <dimen name="sp_22">22sp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
 </resources>

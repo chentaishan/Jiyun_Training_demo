@@ -1,17 +1,12 @@
 package com.example.jiyun_training_demo.ui.home;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +18,6 @@ import com.example.jiyun_training_demo.bean.CartBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.contract.CartContract;
 import com.example.jiyun_training_demo.presenter.CartPresenter;
-
-import java.util.ArrayList;
 
 public class CartFragment extends BaseFragment<CartPresenter> implements View.OnClickListener, CartContract.View<CartBean> {
 
@@ -50,7 +43,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
         car_recycler = (RecyclerView) itemView.findViewById(R.id.car_recycler);
 
         car_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        car_recycler.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        car_recycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         carRlvAdapter = new CarRlvAdapter(getContext());
         car_recycler.setAdapter(carRlvAdapter);
@@ -61,14 +54,14 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
         mBtnCarPressCar.setOnClickListener(this);
         mTvEditStateCar = (TextView) itemView.findViewById(R.id.car_tv_edit_state);
         mCarLeadRel = (RelativeLayout) itemView.findViewById(R.id.rel_car_lead);
-
+        mTvEditStateCar.setOnClickListener(this);
         mCbAllCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mCbAllCar.isChecked()){
+                if (mCbAllCar.isChecked()) {
                     carRlvAdapter.setSelectAll(true);
 
-                }else{
+                } else {
                     carRlvAdapter.setSelectAll(false);
 
                 }
@@ -95,17 +88,50 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
         switch (v.getId()) {
             case R.id.car_btn_car_press:
                 // TODO 20/03/21
+//删除数据
+                if (carRlvAdapter.isEditMode()) {
+                    carRlvAdapter.deleteSelect();
+                } else {
+//                    下单
+
+
+                }
+
+
+                break;
+            case R.id.car_tv_edit_state:
+                if (carRlvAdapter.isEditMode()) {
+                    carRlvAdapter.setEditMode(false);
+                    mTvEditStateCar.setText("编辑");
+                    mBtnCarPressCar.setText("下单");
+
+                    // 重新计算
+
+                    carRlvAdapter.exitEditMode();
+
+                } else {
+                    carRlvAdapter.setEditMode(true);
+                    mBtnCarPressCar.setText("删除所选");
+                    mTvEditStateCar.setText("完成");
+                    // TODO 下单
+
+
+
+                }
+
                 break;
             default:
                 break;
         }
     }
-    private void setAllPrice( int [] price) {
 
-        mTvCountPriceCar.setText("总价："+price[0]+"元");
-        mCbAllCar.setText("全部（"+price[1]+"）");
+    private void setAllPrice(int[] price) {
+
+        mTvCountPriceCar.setText("总价：" + price[0] + "元");
+        mCbAllCar.setText("全部（" + price[1] + "）");
 
     }
+
     @Override
     public void updateUISuccess(ComonResult<CartBean> results) {
 
