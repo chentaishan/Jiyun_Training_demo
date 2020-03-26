@@ -9,6 +9,7 @@ import com.example.jiyun_training_demo.bean.DetailsBean;
 import com.example.jiyun_training_demo.bean.HomeBean;
 import com.example.jiyun_training_demo.bean.LoginBean;
 import com.example.jiyun_training_demo.bean.RegisterBean;
+import com.example.jiyun_training_demo.bean.SearchBean;
 import com.example.jiyun_training_demo.bean.SortTypeBean;
 import com.example.jiyun_training_demo.bean.SortType_Itembean;
 import com.example.jiyun_training_demo.bean.TopicBean;
@@ -70,5 +71,12 @@ public interface HomeService {
     //    https://cdwan.cn/api/cart/index
     @GET("cart/index")
     Flowable<ComonResult<CartBean>> getCartDataList(@Header("X-Nideshop-Token") String token);
+
+
+
+
+    @GET("goods/list")
+    Flowable<SearchBean> getGoodsList(@Query("keyword") String keyword, @Query("page") int page
+            , @Query("size") int size, @Query("sort") String sort, @Query("order") String order, @Query("categoryId") int categoryId);
 
 }

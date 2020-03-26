@@ -1,5 +1,6 @@
 package com.example.jiyun_training_demo.ui.notifications;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
+import com.example.jiyun_training_demo.SearchActivity;
 import com.example.jiyun_training_demo.base.BaseFragment;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
 import com.example.jiyun_training_demo.bean.CatalogBean;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import q.rorbin.verticaltablayout.VerticalTabLayout;
 import q.rorbin.verticaltablayout.adapter.TabAdapter;
+import q.rorbin.verticaltablayout.widget.ITabView;
 import q.rorbin.verticaltablayout.widget.QTabView;
 import q.rorbin.verticaltablayout.widget.TabView;
 
@@ -33,6 +36,7 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
     private LinearLayout mContent;
     private List<CatalogBean.DataBean.CategoryListBean> categoryList;
     private MySelftGridView mySelftGridView;
+    private TextView mSearchTv;
 
     @Override
     protected void initData() {
@@ -68,6 +72,15 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
             @Override
             public void onTabReselected(TabView tab, int position) {
 
+            }
+        });
+        mSearchTv = (TextView) itemView.findViewById(R.id.tv_search);
+
+        mSearchTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
         });
     }

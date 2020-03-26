@@ -9,4 +9,6 @@
     <color name="col_white">#ffffff</color>
     <color name="col_black">#000000</color>
     <color name="col_gray_word">#7C7A7A</color>
+    <color name="colorShapBg">#75D6D1D1</color>
+
 </resources>

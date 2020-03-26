@@ -4,77 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_search_bg"
+        android:gravity="center">
 
-    <q.rorbin.verticaltablayout.VerticalTabLayout
-        android:id="@+id/tablayout"
-        android:layout_width="100dp"
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_search"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="商品搜索，共239款好物" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EDEDED"
-        app:indicator_color="#FFFFFF"
-        app:indicator_gravity="fill"
-        app:tab_height="50dp"
-        app:tab_mode="scrollable" />
-
-    <View
-        android:layout_width="1px"
-        android:layout_height="match_parent"
-        android:background="#DBDEDF" />
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
 
-        <LinearLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
+        <q.rorbin.verticaltablayout.VerticalTabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="#EDEDED"
+            app:indicator_color="#FFFFFF"
+            app:indicator_gravity="fill"
+            app:tab_height="50dp"
+            app:tab_mode="scrollable" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#DBDEDF" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-                <ImageView
-                    android:id="@+id/top_image"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_height="111dp"
-                    android:scaleType="centerCrop"
-                    />
+                    android:layout_height="wrap_content">
 
+
+                    <ImageView
+                        android:id="@+id/top_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="111dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="centerCrop" />
+
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        tools:text="JJJJJJJJJJJJJ" />
+
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/type_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
                     android:layout_centerInParent="true"
-                    android:gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="22dp"
+                    android:gravity="center_horizontal"
                     tools:text="JJJJJJJJJJJJJ" />
 
-            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/type_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="22dp"
-                android:layout_marginBottom="22dp"
-                android:gravity="center_horizontal"
-                tools:text="JJJJJJJJJJJJJ" />
+            </LinearLayout>
 
 
-        </LinearLayout>
-
-
-    </ScrollView>
-
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>
