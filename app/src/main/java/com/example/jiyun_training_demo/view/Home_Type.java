@@ -44,10 +44,7 @@ public class Home_Type extends LinearLayout {
             Home_ChannelBean home_channelBean = channelBeanList.get(i);
 
             TextView textView = new TextView(getContext());
-            if (i % 2 == 0) {
 
-                textView.setBackgroundColor(Color.parseColor("#EEE685"));
-            }
             textView.setText(home_channelBean.getName());
             LayoutParams layoutParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;

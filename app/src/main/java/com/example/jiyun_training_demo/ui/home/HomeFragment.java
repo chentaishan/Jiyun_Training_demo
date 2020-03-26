@@ -101,9 +101,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
             Home_CategoryView home_categoryView = new Home_CategoryView(getContext());
 
-            home_categoryView.initTitleView(categoryList.get(i).getName());
             try {
-                home_categoryView.initGridList(categoryList.get(i).getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
+                home_categoryView.initGridList(categoryList.get(i).getName(),categoryList.get(i).getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
                     @Override
                     public void setItem(Object o, ImageView img, TextView title, TextView price) {
     //                    List<CategoryListBean.GoodsListBean> goodsList = categoryList.get(i).getGoodsList();

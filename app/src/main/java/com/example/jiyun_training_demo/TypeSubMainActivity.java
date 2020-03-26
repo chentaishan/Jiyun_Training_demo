@@ -99,7 +99,7 @@ public class TypeSubMainActivity extends BaseActivity<TypeSubMainPresenter> impl
     public void updateUISuccess(TypeList2SubItemListBean result) {
 
         try {
-            mCategorylist.initGridList(result.getData().getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
+            mCategorylist.initGridList("",result.getData().getGoodsList(), new Home_CategoryView.IUpdateUIListener() {
                 @Override
                 public void setItem(Object o, ImageView img, TextView title, TextView price) {
                     TypeList2SubItemListBean.DataBeanX.GoodsListBean   goodsListBean = (TypeList2SubItemListBean.DataBeanX.GoodsListBean) o;

@@ -46,15 +46,17 @@ public class Home_CategoryView extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    public void initTitleView(String name) {
+    private void initTitleView(String name) {
 
         TextView textView = new TextView(getContext());
+        this.addView(textView);
+
+
         textView.setText(name);
         textView.setGravity(Gravity.CENTER);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0, 44, 0, 44);
         textView.setLayoutParams(layoutParams);
-        addView(textView);
 
 
     }
@@ -83,14 +85,18 @@ public class Home_CategoryView extends LinearLayout {
         this.columnNum = columnNum;
     }
 
-    public <T> void initGridList(final List<T> listBeans, IUpdateUIListener iUpdateUIListener) throws IllegalAccessException {
+    public <T> void initGridList(String name,final List<T> listBeans, IUpdateUIListener iUpdateUIListener) throws IllegalAccessException {
+        removeAllViews();
+        initTitleView(name);
+
+
         if (columnNum == 0) {
             throw new IllegalAccessException("请设置列数！");
         }
         this.iUpdateUIListener = iUpdateUIListener;
         imageWidth = SystemUtils.getScreenWidth(getContext()) - totalDividerWidth;
         imageWidth = imageWidth / columnNum;
-        removeAllViews();
+
         for (int i = 0; i < listBeans.size(); i++) {
 
             T t = listBeans.get(i);
