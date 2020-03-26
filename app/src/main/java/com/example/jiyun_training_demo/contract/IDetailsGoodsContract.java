@@ -9,6 +9,7 @@ public interface IDetailsGoodsContract {
     interface View<T> extends IBaseView {
 
         void updateUISuccess(ComonResult<T> results);
+        void addCartSuccess(ComonResult<T> results);
         void updateUIFailed(String msg);
 
     }

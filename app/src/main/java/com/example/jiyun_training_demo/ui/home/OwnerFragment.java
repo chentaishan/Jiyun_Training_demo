@@ -24,7 +24,7 @@ public class OwnerFragment extends BaseFragment implements View.OnClickListener 
     private TextView mB;
     private GridView mGridview;
 
-    String[] titles = {"我的订单", "优惠卷", "礼品卡", "我的收藏", "我的足迹", "会员福利", "地址管理"};
+    String[] titles = {"我的订单", "优惠卷", "礼品卡", "我的收藏", "我的足迹", "会员福利"};
     private RelativeLayout mLayoutLogin;
 
     @Override

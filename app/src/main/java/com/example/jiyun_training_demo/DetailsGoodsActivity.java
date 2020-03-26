@@ -7,12 +7,14 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.base.BaseActivity;
+import com.example.jiyun_training_demo.bean.AddCartBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.DetailsBean;
 import com.example.jiyun_training_demo.contract.IDetailsGoodsContract;
@@ -46,7 +48,7 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
     private LinearLayout mQuestionTxt;
     private RecyclerView mRecyclerView;
     private TextView mCollectTxt;
-    private TextView mCartTxt;
+    private ImageView mCartTxt;
     private TextView mBuyTxt;
     private TextView mAddCartTxt;
     private MySelftGridView mSelfview;
@@ -86,7 +88,7 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
 
 
         mCollectTxt = (TextView) findViewById(R.id.txt_collect);
-        mCartTxt = (TextView) findViewById(R.id.txt_cart);
+        mCartTxt = (ImageView) findViewById(R.id.txt_cart);
         mBuyTxt = (TextView) findViewById(R.id.txt_buy);
         mAddCartTxt = (TextView) findViewById(R.id.txt_addCart);
         mQuestionTxt = (LinearLayout) findViewById(R.id.txt_question);
@@ -163,6 +165,14 @@ public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> impleme
 //        mSelfview.initMyGridView();
 
 
+    }
+
+    @Override
+    public void addCartSuccess(ComonResult  results) {
+        AddCartBean data = (AddCartBean) results.getData();
+
+        Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+        mCartLayoutAdd.setVisibility(View.GONE);
     }
 
     @Override
