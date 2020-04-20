@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.base.BaseFragment;
+import com.example.jiyun_training_demo.base.BasePresenterFragment;
 import com.example.jiyun_training_demo.bean.CategoryListBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.HomeBean;
@@ -26,7 +27,7 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.List;
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View<HomeBean> {
+public class HomeFragment extends BasePresenterFragment<HomePresenter> implements HomeContract.View<HomeBean> {
 
     Banner banner;
     Home_Type homeType;
@@ -49,7 +50,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     protected void initView(View view) {
-
+super.initView(view);
         banner = view.findViewById(R.id.banner);
         homeType = view.findViewById(R.id.home_one_layout);
         homeBrand = view.findViewById(R.id.home_two_layout);

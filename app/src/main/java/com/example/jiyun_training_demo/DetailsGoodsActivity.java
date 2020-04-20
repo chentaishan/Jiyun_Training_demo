@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.base.BaseActivity;
+import com.example.jiyun_training_demo.base.BasePresenterActivity;
 import com.example.jiyun_training_demo.bean.AddCartBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.DetailsBean;
@@ -25,7 +26,7 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.List;
 
-public class DetailsGoodsActivity extends BaseActivity<DetailsPresenter> implements IDetailsGoodsContract.View<DetailsBean>, View.OnClickListener {
+public class DetailsGoodsActivity extends BasePresenterActivity<DetailsPresenter> implements IDetailsGoodsContract.View<DetailsBean>, View.OnClickListener {
 
 
     private Banner mBanner;

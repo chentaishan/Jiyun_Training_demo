@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.adapter.CarRlvAdapter;
 import com.example.jiyun_training_demo.base.BaseFragment;
+import com.example.jiyun_training_demo.base.BasePresenterFragment;
 import com.example.jiyun_training_demo.bean.CartBean;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.contract.CartContract;
 import com.example.jiyun_training_demo.presenter.CartPresenter;
 
-public class CartFragment extends BaseFragment<CartPresenter> implements View.OnClickListener, CartContract.View<CartBean> {
+public class CartFragment extends BasePresenterFragment<CartPresenter> implements View.OnClickListener, CartContract.View<CartBean> {
 
     private RecyclerView car_recycler;
     private CheckBox mCbAllCar;
@@ -40,6 +41,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements View.On
     }
 
     protected void initView(@NonNull final View itemView) {
+        super.initView(itemView);
         car_recycler = (RecyclerView) itemView.findViewById(R.id.car_recycler);
 
         car_recycler.setLayoutManager(new LinearLayoutManager(getContext()));

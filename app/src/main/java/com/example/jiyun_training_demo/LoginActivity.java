@@ -12,12 +12,13 @@ import android.widget.Toast;
 
 import com.example.jiyun_training_demo.base.BaseActivity;
 import com.example.jiyun_training_demo.base.BasePresenter;
+import com.example.jiyun_training_demo.base.BasePresenterActivity;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.bean.LoginBean;
 import com.example.jiyun_training_demo.contract.ILoginContract;
 import com.example.jiyun_training_demo.presenter.LoginPresenter;
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginContract.View<LoginBean>{
+public class LoginActivity extends BasePresenterActivity<LoginPresenter> implements ILoginContract.View<LoginBean>{
 
 
     EditText name,psw;
@@ -35,6 +36,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     protected void initView() {
+        super.initView();
 
         name = findViewById(R.id.name);
         psw = findViewById(R.id.pass);

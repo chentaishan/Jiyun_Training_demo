@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.SearchActivity;
 import com.example.jiyun_training_demo.base.BaseFragment;
+import com.example.jiyun_training_demo.base.BasePresenterFragment;
 import com.example.jiyun_training_demo.bean.CataLogItemBean;
 import com.example.jiyun_training_demo.bean.CatalogBean;
 import com.example.jiyun_training_demo.bean.SortTypeBean;
@@ -25,7 +26,7 @@ import q.rorbin.verticaltablayout.widget.ITabView;
 import q.rorbin.verticaltablayout.widget.QTabView;
 import q.rorbin.verticaltablayout.widget.TabView;
 
-public class NotificationsFragment extends BaseFragment<SortTypePresenter> implements ISortTypeContract.View<SortTypeBean> {
+public class NotificationsFragment extends BasePresenterFragment<SortTypePresenter> implements ISortTypeContract.View<SortTypeBean> {
 
 
     private VerticalTabLayout mTablayout;
@@ -52,7 +53,7 @@ public class NotificationsFragment extends BaseFragment<SortTypePresenter> imple
 
     @Override
     protected void initView(View itemView) {
-
+        super.initView(itemView);
 
         mTablayout = (VerticalTabLayout) itemView.findViewById(R.id.tablayout);
         mImageTop = (ImageView) itemView.findViewById(R.id.top_image);

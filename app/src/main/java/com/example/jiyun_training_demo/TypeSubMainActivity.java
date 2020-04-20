@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jiyun_training_demo.base.BaseActivity;
+import com.example.jiyun_training_demo.base.BasePresenterActivity;
 import com.example.jiyun_training_demo.bean.CategoryListBean;
 import com.example.jiyun_training_demo.bean.SubCategoryListBean;
 import com.example.jiyun_training_demo.bean.TypeList2SubItemListBean;
@@ -16,7 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class TypeSubMainActivity extends BaseActivity<TypeSubMainPresenter> implements ITypeSubMainContract.View {
+public class TypeSubMainActivity extends BasePresenterActivity<TypeSubMainPresenter> implements ITypeSubMainContract.View {
 
 
     private TabLayout mTablayout;

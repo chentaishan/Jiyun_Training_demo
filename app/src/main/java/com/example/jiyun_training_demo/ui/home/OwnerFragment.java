@@ -15,9 +15,10 @@ import androidx.annotation.Nullable;
 import com.example.jiyun_training_demo.LoginActivity;
 import com.example.jiyun_training_demo.R;
 import com.example.jiyun_training_demo.base.BaseFragment;
+import com.example.jiyun_training_demo.base.BasePresenterFragment;
 import com.example.jiyun_training_demo.base.IBasePresenter;
 
-public class OwnerFragment extends BaseFragment implements View.OnClickListener {
+public class OwnerFragment extends BasePresenterFragment implements View.OnClickListener {
 
 
     private ImageView mImgUser;
@@ -39,7 +40,7 @@ public class OwnerFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initView(View itemView) {
-
+        super.initView(itemView);
         mImgUser = (ImageView) itemView.findViewById(R.id.user_img);
         mB = (TextView) itemView.findViewById(R.id.login_text);
         mGridview = (GridView) itemView.findViewById(R.id.gridview);

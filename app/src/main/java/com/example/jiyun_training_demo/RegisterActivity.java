@@ -11,11 +11,12 @@ import android.widget.Toast;
 
 import com.example.jiyun_training_demo.base.BaseActivity;
 import com.example.jiyun_training_demo.base.BasePresenter;
+import com.example.jiyun_training_demo.base.BasePresenterActivity;
 import com.example.jiyun_training_demo.bean.ComonResult;
 import com.example.jiyun_training_demo.contract.IRegisterContract;
 import com.example.jiyun_training_demo.presenter.RegisterPresenter;
 
-public class RegisterActivity  extends BaseActivity<RegisterPresenter> implements IRegisterContract.View {
+public class RegisterActivity  extends BasePresenterActivity<RegisterPresenter> implements IRegisterContract.View {
     EditText name,psw;
     Button  register;
 
