@@ -17,10 +17,10 @@
         android:title="@string/title_notifications" />
     <item
         android:id="@+id/navigation_cart"
-        android:icon="@drawable/se_cart"
+        android:icon="@drawable/card_selector"
         android:title="@string/title_cart" />
     <item
         android:id="@+id/navigation_owner"
-        android:icon="@drawable/se_me"
+        android:icon="@drawable/owner_selector"
         android:title="@string/title_me" />
 </menu>

@@ -26,7 +26,7 @@ import q.rorbin.verticaltablayout.widget.ITabView;
 import q.rorbin.verticaltablayout.widget.QTabView;
 import q.rorbin.verticaltablayout.widget.TabView;
 
-public class NotificationsFragment extends BasePresenterFragment<SortTypePresenter> implements ISortTypeContract.View<SortTypeBean> {
+public class TypeFragment extends BasePresenterFragment<SortTypePresenter> implements ISortTypeContract.View<SortTypeBean> {
 
 
     private VerticalTabLayout mTablayout;
@@ -90,7 +90,6 @@ public class NotificationsFragment extends BasePresenterFragment<SortTypePresent
         return R.layout.fragment_notifications;
     }
 
-    private static final String TAG = "NotificationsFragment";
 
     @Override
     public void updateUISuccess(CatalogBean result) {
