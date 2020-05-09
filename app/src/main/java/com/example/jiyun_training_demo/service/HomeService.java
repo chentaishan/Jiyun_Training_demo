@@ -30,7 +30,7 @@ import retrofit2.http.QueryMap;
 
 public interface HomeService {
 
-    String baseUrl = "https://cdwan.cn/api/";
+    String baseUrl = "http://39.96.0.38/api/";
 
     @GET("index")
     Flowable<ComonResult<HomeBean>> getHome();

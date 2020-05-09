@@ -63,6 +63,7 @@ public class TypeSubMainActivity extends BasePresenterActivity<TypeSubMainPresen
     @Override
     protected void initView() {
 
+        super.initView();
         mTablayout = (TabLayout) findViewById(R.id.tablayout);
 
         mTablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
