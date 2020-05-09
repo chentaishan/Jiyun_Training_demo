@@ -41,7 +41,10 @@ public class HttpManager {
 
     public Retrofit getRetrofit(String url) {
 
-        return new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()  ).addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        return new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create()  )
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient())
                 .build();
 
@@ -68,10 +71,10 @@ public class HttpManager {
         public Response intercept(Chain chain) throws IOException {
 
             Request request = chain.request();
-
-          request.newBuilder()    .addHeader("Client-Type","ANDROID")
-                    .addHeader("X-Nideshop-Token", SpUtils.getInstance().getString("token"))
-                    .build();
+                request.newBuilder()
+                     .addHeader("Client-Type","ANDROID")
+                     .addHeader("X-Nideshop-Token", SpUtils.getInstance().getString("token"))
+                     .build();
 
             return chain.proceed(request);
         }
@@ -84,7 +87,6 @@ public class HttpManager {
 
             request = chain.request();
             if (!SystemUtils.checkNetWork()){
-
                 request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
             }
 

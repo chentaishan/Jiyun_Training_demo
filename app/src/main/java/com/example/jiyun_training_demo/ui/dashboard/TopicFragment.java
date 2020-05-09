@@ -17,7 +17,7 @@ import com.example.jiyun_training_demo.bean.TopicBean;
 import com.example.jiyun_training_demo.contract.TopicContract;
 import com.example.jiyun_training_demo.presenter.TopicPresenter;
 
-public class TopicFragment  extends BasePresenterFragment<TopicPresenter> implements TopicContract.View<TopicBean> {
+public class TopicFragment extends BasePresenterFragment<TopicPresenter> implements TopicContract.View<TopicBean> {
 
     private RecyclerView recyclerView;
     private TopicAdapter topicAdapter;
@@ -36,7 +36,7 @@ public class TopicFragment  extends BasePresenterFragment<TopicPresenter> implem
 
     @Override
     protected void initView(View view) {
-super.initView(view);
+        super.initView(view);
         recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         topicAdapter = new TopicAdapter(context);
@@ -53,7 +53,6 @@ super.initView(view);
     public void updateUISuccess(ComonResult<TopicBean> result) {
         topicAdapter.addDataList(result.getData().getData());
     }
-
 
 
     @Override

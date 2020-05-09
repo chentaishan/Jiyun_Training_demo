@@ -30,7 +30,6 @@ public class NotificationsFragment extends BasePresenterFragment<SortTypePresent
 
 
     private VerticalTabLayout mTablayout;
-
     private ImageView mImageTop;
     private TextView mTitle;
     private TextView mTitleType;
