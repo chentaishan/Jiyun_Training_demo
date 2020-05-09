@@ -51,7 +51,7 @@ public class Home_HotGoods extends LinearLayout {
         addView(textView);
         View view = new View(getContext());
         view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
-        view.setBackgroundColor(Color.parseColor("#333333"));
+        view.setBackgroundResource(R.color.col_gray_line);
         addView(view);
 
 
@@ -79,7 +79,7 @@ public class Home_HotGoods extends LinearLayout {
 
             View view = new View(getContext());
             view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
-            view.setBackgroundColor(Color.parseColor("#333333"));
+            view.setBackgroundResource(R.color.col_gray_line);
             addView(view);
 
         }
