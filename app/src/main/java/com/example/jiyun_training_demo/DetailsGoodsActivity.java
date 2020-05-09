@@ -78,6 +78,7 @@ public class DetailsGoodsActivity extends BasePresenterActivity<DetailsPresenter
     @Override
     protected void initView() {
 
+        super.initView();
         mBanner = (Banner) findViewById(R.id.banner);
         mWebview = (WebView) findViewById(R.id.webview);
         mTitleTxt = (TextView) findViewById(R.id.txt_title);
