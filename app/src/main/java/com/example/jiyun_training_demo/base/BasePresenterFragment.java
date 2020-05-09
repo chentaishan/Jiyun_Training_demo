@@ -14,7 +14,6 @@ public abstract class BasePresenterFragment<P extends IBasePresenter> extends Ba
 
 
     protected P presenter;
-    protected Context context;
 
 
     @Override

@@ -32,10 +32,15 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
         if (view != null) {
             view = null;
         }
+        if (compositeDisposable != null) {
+
+            compositeDisposable.dispose();
+        }
+
     }
 
     /**
-     * 添加背压机制
+     *
      * @param disposable
      */
     public void addSubscribe(Disposable disposable) {
@@ -45,5 +50,6 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
             compositeDisposable = new CompositeDisposable();
         }
         compositeDisposable.add(disposable);
+
     }
 }
